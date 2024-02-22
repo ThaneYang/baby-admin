@@ -23,6 +23,15 @@ const validator = {
     "title": "商品跳转链接",
     "label": "商品跳转链接"
   },
+  "web_disk": {
+    "rules": [
+      {
+        "format": "string"
+      }
+    ],
+    "title": "百度网盘地址",
+    "label": "百度网盘地址"
+  },
   "banner": {
     "rules": [
       {

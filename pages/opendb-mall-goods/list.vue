@@ -16,13 +16,14 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="name,goods_url,banner,price,is_on_sale,seller_note" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="name,goods_url,web_disk,banner,price,is_on_sale,seller_note" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'name')" sortable @sort-change="sortChange($event, 'name')">商品名称</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'goods_url')" sortable @sort-change="sortChange($event, 'goods_url')">商品跳转链接</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'web_disk')" sortable @sort-change="sortChange($event, 'web_disk')">百度网盘地址</uni-th>
             <uni-th align="center" sortable @sort-change="sortChange($event, 'banner')">banner图片</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'price')" sortable @sort-change="sortChange($event, 'price')">售价</uni-th>
             <uni-th align="center" sortable @sort-change="sortChange($event, 'is_on_sale')">是否上架</uni-th>
@@ -32,6 +33,7 @@
           <uni-tr v-for="(item,index) in data" :key="index">
             <uni-td align="center">{{item.name}}</uni-td>
             <uni-td align="center">{{item.goods_url}}</uni-td>
+            <uni-td align="center">{{item.web_disk}}</uni-td>
             <uni-td align="center">
               <template v-for="(file, j) in item.banner">
                 <uni-file-picker v-if="file.fileType == 'image'" :value="file" :file-mediatype="file.fileType" :imageStyles="imageStyles" readonly></uni-file-picker>
@@ -98,6 +100,7 @@
           "fields": {
             "商品名称": "name",
             "商品跳转链接": "goods_url",
+            "百度网盘地址": "web_disk",
             "banner图片": "banner",
             "售价": "price",
             "是否上架": "is_on_sale",

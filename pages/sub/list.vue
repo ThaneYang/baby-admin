@@ -16,34 +16,36 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="user_id,template_id,sub_date,order_id,order_date,goods_id,goods_name,sub_content,sub_status" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="user_id,openid,template_id,order_no,user_order_success,total_fee,sub_date,product_id,product_name,sub_content,sub_status" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'user_id')" sortable @sort-change="sortChange($event, 'user_id')">订阅用户ID</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'openid')" sortable @sort-change="sortChange($event, 'openid')">订阅用户openID</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'template_id')" sortable @sort-change="sortChange($event, 'template_id')">订阅模版ID</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'order_no')" sortable @sort-change="sortChange($event, 'order_no')">订单业务号</uni-th>
+            <uni-th align="center" sortable @sort-change="sortChange($event, 'user_order_success')">支付是否成功</uni-th>
+            <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'total_fee')" sortable @sort-change="sortChange($event, 'total_fee')">支付金额</uni-th>
             <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'sub_date')" sortable @sort-change="sortChange($event, 'sub_date')">订阅时间</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'order_id')" sortable @sort-change="sortChange($event, 'order_id')">订单ID</uni-th>
-            <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'order_date')" sortable @sort-change="sortChange($event, 'order_date')">下单时间</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'goods_id')" sortable @sort-change="sortChange($event, 'goods_id')">商品ID</uni-th>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'goods_name')" sortable @sort-change="sortChange($event, 'goods_name')">商品名称</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'product_id')" sortable @sort-change="sortChange($event, 'product_id')">商品ID</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'product_name')" sortable @sort-change="sortChange($event, 'product_name')">商品名称</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'sub_content')" sortable @sort-change="sortChange($event, 'sub_content')">发送内容</uni-th>
-            <uni-th align="center" sortable @sort-change="sortChange($event, 'sub_status')">是否已发送</uni-th>
+            <uni-th align="center" sortable @sort-change="sortChange($event, 'sub_status')">是否已发送（不用手动修改）</uni-th>
             <uni-th align="center">操作</uni-th>
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
             <uni-td align="center">{{item.user_id}}</uni-td>
+            <uni-td align="center">{{item.openid}}</uni-td>
             <uni-td align="center">{{item.template_id}}</uni-td>
+            <uni-td align="center">{{item.order_no}}</uni-td>
+            <uni-td align="center">{{item.user_order_success == true ? '✅' : '❌'}}</uni-td>
+            <uni-td align="center">{{item.total_fee}}</uni-td>
             <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.sub_date"></uni-dateformat>
             </uni-td>
-            <uni-td align="center">{{item.order_id}}</uni-td>
-            <uni-td align="center">
-              <uni-dateformat :threshold="[0, 0]" :date="item.order_date"></uni-dateformat>
-            </uni-td>
-            <uni-td align="center">{{item.goods_id}}</uni-td>
-            <uni-td align="center">{{item.goods_name}}</uni-td>
+            <uni-td align="center">{{item.product_id}}</uni-td>
+            <uni-td align="center">{{item.product_name}}</uni-td>
             <uni-td align="center">{{item.sub_content}}</uni-td>
             <uni-td align="center">{{item.sub_status == true ? '✅' : '❌'}}</uni-td>
             <uni-td align="center">
@@ -102,14 +104,16 @@
           "type": "xls",
           "fields": {
             "订阅用户ID": "user_id",
+            "订阅用户openID": "openid",
             "订阅模版ID": "template_id",
+            "订单业务号": "order_no",
+            "支付是否成功": "user_order_success",
+            "支付金额": "total_fee",
             "订阅时间": "sub_date",
-            "订单ID": "order_id",
-            "下单时间": "order_date",
-            "商品ID": "goods_id",
-            "商品名称": "goods_name",
+            "商品ID": "product_id",
+            "商品名称": "product_name",
             "发送内容": "sub_content",
-            "是否已发送": "sub_status"
+            "是否已发送（不用手动修改）": "sub_status"
           }
         },
         exportExcelData: []

@@ -7,6 +7,9 @@
       <uni-forms-item name="goods_url" label="商品跳转链接">
         <uni-easyinput placeholder="商品跳转链接" v-model="formData.goods_url" trim="both"></uni-easyinput>
       </uni-forms-item>
+      <uni-forms-item name="web_disk" label="百度网盘地址">
+        <uni-easyinput placeholder="百度网盘地址" v-model="formData.web_disk" trim="both"></uni-easyinput>
+      </uni-forms-item>
       <uni-forms-item name="banner" label="banner图片">
         <uni-file-picker file-mediatype="image" file-extname="jpg,png,jpeg" :limit="9" return-type="array" v-model="formData.banner"></uni-file-picker>
       </uni-forms-item>
@@ -53,6 +56,7 @@
       let formData = {
         "name": "",
         "goods_url": "",
+        "web_disk": "",
         "banner": [],
         "price": null,
         "is_on_sale": true,

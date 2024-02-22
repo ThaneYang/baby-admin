@@ -11,6 +11,15 @@ const validator = {
     "title": "订阅用户ID",
     "label": "订阅用户ID"
   },
+  "openid": {
+    "rules": [
+      {
+        "format": "string"
+      }
+    ],
+    "title": "订阅用户openID",
+    "label": "订阅用户openID"
+  },
   "template_id": {
     "rules": [
       {
@@ -20,6 +29,32 @@ const validator = {
     "title": "订阅模版ID",
     "label": "订阅模版ID"
   },
+  "order_no": {
+    "rules": [
+      {
+        "format": "string"
+      }
+    ],
+    "title": "订单业务号",
+    "label": "订单业务号"
+  },
+  "user_order_success": {
+    "rules": [
+      {
+        "format": "bool"
+      }
+    ],
+    "label": "支付是否成功"
+  },
+  "total_fee": {
+    "rules": [
+      {
+        "format": "int"
+      }
+    ],
+    "title": "支付金额",
+    "label": "支付金额"
+  },
   "sub_date": {
     "rules": [
       {
@@ -27,33 +62,9 @@ const validator = {
       }
     ],
     "title": "订阅时间",
-    "defaultValue": {
-      "$env": "now"
-    },
     "label": "订阅时间"
   },
-  "order_id": {
-    "rules": [
-      {
-        "format": "string"
-      }
-    ],
-    "title": "订单ID",
-    "label": "订单ID"
-  },
-  "order_date": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ],
-    "title": "下单时间",
-    "defaultValue": {
-      "$env": "now"
-    },
-    "label": "下单时间"
-  },
-  "goods_id": {
+  "product_id": {
     "rules": [
       {
         "format": "string"
@@ -62,7 +73,7 @@ const validator = {
     "title": "商品ID",
     "label": "商品ID"
   },
-  "goods_name": {
+  "product_name": {
     "rules": [
       {
         "format": "string"
@@ -86,9 +97,9 @@ const validator = {
         "format": "bool"
       }
     ],
-    "title": "是否已发送",
+    "title": "是否已发送（不用手动修改）",
     "defaultValue": false,
-    "label": "是否已发送"
+    "label": "是否已发送（不用手动修改）"
   }
 }
 

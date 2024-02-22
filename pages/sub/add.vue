@@ -4,28 +4,34 @@
       <uni-forms-item name="user_id" label="订阅用户ID">
         <uni-easyinput placeholder="订阅用户ID" v-model="formData.user_id"></uni-easyinput>
       </uni-forms-item>
+      <uni-forms-item name="openid" label="订阅用户openID">
+        <uni-easyinput placeholder="订阅用户openID" v-model="formData.openid"></uni-easyinput>
+      </uni-forms-item>
       <uni-forms-item name="template_id" label="订阅模版ID">
         <uni-easyinput placeholder="订阅模版ID" v-model="formData.template_id"></uni-easyinput>
+      </uni-forms-item>
+      <uni-forms-item name="order_no" label="订单业务号">
+        <uni-easyinput placeholder="订单业务号" v-model="formData.order_no"></uni-easyinput>
+      </uni-forms-item>
+      <uni-forms-item name="user_order_success" label="支付是否成功">
+        <switch @change="binddata('user_order_success', $event.detail.value)" :checked="formData.user_order_success"></switch>
+      </uni-forms-item>
+      <uni-forms-item name="total_fee" label="支付金额">
+        <uni-easyinput placeholder="支付金额" type="number" v-model="formData.total_fee"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="sub_date" label="订阅时间">
         <uni-datetime-picker return-type="timestamp" v-model="formData.sub_date"></uni-datetime-picker>
       </uni-forms-item>
-      <uni-forms-item name="order_id" label="订单ID">
-        <uni-easyinput placeholder="订单ID" v-model="formData.order_id"></uni-easyinput>
+      <uni-forms-item name="product_id" label="商品ID">
+        <uni-easyinput placeholder="商品ID" v-model="formData.product_id"></uni-easyinput>
       </uni-forms-item>
-      <uni-forms-item name="order_date" label="下单时间">
-        <uni-datetime-picker return-type="timestamp" v-model="formData.order_date"></uni-datetime-picker>
-      </uni-forms-item>
-      <uni-forms-item name="goods_id" label="商品ID">
-        <uni-easyinput placeholder="商品ID" v-model="formData.goods_id"></uni-easyinput>
-      </uni-forms-item>
-      <uni-forms-item name="goods_name" label="商品名称">
-        <uni-easyinput placeholder="商品名称" v-model="formData.goods_name"></uni-easyinput>
+      <uni-forms-item name="product_name" label="商品名称">
+        <uni-easyinput placeholder="商品名称" v-model="formData.product_name"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="sub_content" label="发送内容">
         <uni-easyinput placeholder="发送内容" v-model="formData.sub_content" trim="both"></uni-easyinput>
       </uni-forms-item>
-      <uni-forms-item name="sub_status" label="是否已发送">
+      <uni-forms-item name="sub_status" label="是否已发送（不用手动修改）">
         <switch @change="binddata('sub_status', $event.detail.value)" :checked="formData.sub_status"></switch>
       </uni-forms-item>
       <view class="uni-button-group">
@@ -61,12 +67,14 @@
     data() {
       let formData = {
         "user_id": "",
+        "openid": "",
         "template_id": "",
+        "order_no": "",
+        "user_order_success": null,
+        "total_fee": null,
         "sub_date": null,
-        "order_id": "",
-        "order_date": null,
-        "goods_id": "",
-        "goods_name": "",
+        "product_id": "",
+        "product_name": "",
         "sub_content": "",
         "sub_status": false
       }
